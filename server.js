@@ -1,10 +1,13 @@
 //Import dependencies modules: 
-const express = require('express')
-const { MongoAPIError, MongoClient, Collection } = require('mongodb')
-// const bodyParser = require('body-parser)
+const { ObjectID } = require('bson');
+const express = require ('express');
+const MongoClient = require('mongodb').MongoClient;
+const app = express();const path = require("path");
+const fs = require("fs");
 
-// Create an Express js instance
-const app = express()
+//CORS
+const cors = require("cors");
+app.use(cors());
 
 // Config express js
 app.use(express.json())
@@ -15,8 +18,6 @@ app.use((req,res,next) => {
 })
 
 // Connect to mongodb
-const mongoClient = require('mongodb').MongoClient;
-
 let db;
 MongoClient.connect('mongodb+srv://sohail:sohailnadeem@cluster0.o3egadt.mongodb.net', (err,client) => {
     db = client.db('cw2')
@@ -48,7 +49,21 @@ let logger = (req,res,next) =>{
 app.use(logger);
 
 //Returns Image or error if image does not exist
-
+app.use('/collection/:collectionName', (req, res, next) => {
+    var filePath = path.join(__dirname, "static/images" , req.url);
+    fs.stat(filePath, function(err, fileInfo){
+         if(err){
+             res.status(404);
+             res.send("Image file not found!");
+             return;
+         }
+         if(fileInfo.isFile()){
+             res.sendFile(filePath);
+             console.log("GET/" + req.url)
+        }
+         else next();
+      });
+ });
 
 // Display message for root path to show tnat Api is Working
 app.get('/', (req,res,next) => {
@@ -66,42 +81,55 @@ app.param('collectionName', (req,res,next,collectionName) => {
 app.get('/collection/:collectionName',(req,res,next)=>{
     req.collection.find({}).toArray((e,results)=>{
         if(e) return next(e)
-        res.send(results);
+        res.send(results)
     })
 })
 
-app.post('/collection/collectionName', (req,res,next) => {
-   req.collection.insert(req.body, (e, results) => {
-    if (e) return next(e)
-    res.send(results.ops);
-   })
+//Adding to the collection
+app.post('/collection/:collectionName', (req, res, next) => {
+       req.collection.insertOne(req.body, (e, results) =>
+         {
+          if (e) return next(e) 
+          res.send(results.ops)
+         })
 })
 
-const ObjectID = require('mongodb').ObjectID;
-app.get('/collection/:collectionName/:id', (req, res, next) => {
-    req.collection.findOne({ _id: new ObjectID(req.params.id) },
-     (e, result) => {
-     if (e) return next(e)
-     res.send(result)
-    })
-})
-
-app.put('/collection/:collectionName/:id', (req, res, next) => {
-    req.collection.update(
+//Updating Collection
+app.put('/collection/:collectionName/:id', (req,res,next) => {
+      req.collection.update(
         {_id: new ObjectID(req.params.id)},
-        {$set: req.body},
-        {safe: true, multi: false},
-        (e, result) => {
-          if (e) return next(e)
-          res.send((result = 1) ? {msg: 'success'} : {msg: 'error'})
-        })
-})
-app.get('/lessons', (request,response)=>{
-    db.collection('lessons').find({}).toArray((err,res)=>{
-        if(err) return next(e)
-            response.json(res);
-    })
-})
+            {$set: req.body},
+            {safe:true, multi:false}, (e,results) => {
+                if (e) return next(e)
+                res.send(results ? {msg:'success'} : {msg:'error'})
+         })
+ })
+
+// const ObjectID = require('mongodb').ObjectID;
+// app.get('/collection/:collectionName/:id', (req, res, next) => {
+//     req.collection.findOne({ _id: new ObjectID(req.params.id) },
+//      (e, result) => {
+//      if (e) return next(e)
+//      res.send(result)
+//     })
+// })
+
+// app.put('/collection/:collectionName/:id', (req, res, next) => {
+//     req.collection.update(
+//         {_id: new ObjectID(req.params.id)},
+//         {$set: req.body},
+//         {safe: true, multi: false},
+//         (e, result) => {
+//           if (e) return next(e)
+//           res.send((result = 1) ? {msg: 'success'} : {msg: 'error'})
+//         })
+// })
+// app.get('/lessons', (request,response)=>{
+//     db.collection('lessons').find({}).toArray((err,res)=>{
+//         if(err) return next(e)
+//             response.json(res);
+//     })
+// })
 
 app.listen(3000, function () {
     console.log("Express.js listening on localhost:3000");
