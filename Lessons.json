@@ -1,0 +1,111 @@
+[{
+  "_id": {
+    "$oid": "63de3508cd01cfc8fa929a32"
+  },
+  "id": 1001,
+  "subject": "Maths",
+  "location": "London",
+  "price": 120,
+  "image": "images/Maths.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de3527cd01cfc8fa929a34"
+  },
+  "id": 1002,
+  "subject": "English",
+  "location": "India",
+  "price": 80,
+  "image": "images/English.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de3540cd01cfc8fa929a36"
+  },
+  "id": 1003,
+  "subject": "Chemistry",
+  "location": "America",
+  "price": 90,
+  "image": "images/Chemistry.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de3568cd01cfc8fa929a39"
+  },
+  "id": 1004,
+  "subject": "Physics",
+  "location": "Mauritius",
+  "price": 95,
+  "image": "images/Physics.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de3580cd01cfc8fa929a3b"
+  },
+  "id": 1005,
+  "subject": "Biology",
+  "location": "Dubai",
+  "price": 110,
+  "image": "images/Biology.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de35b3cd01cfc8fa929a3d"
+  },
+  "id": 1006,
+  "subject": "Geography",
+  "location": "Canada",
+  "price": 100,
+  "image": "images/Geography.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de35d1cd01cfc8fa929a3f"
+  },
+  "id": 1007,
+  "subject": "French",
+  "location": "London",
+  "price": 80,
+  "image": "images/French.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de35e8cd01cfc8fa929a41"
+  },
+  "id": 1008,
+  "subject": "Spanish",
+  "location": "London",
+  "price": 85,
+  "image": "images/Spanish.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de35fccd01cfc8fa929a43"
+  },
+  "id": 1009,
+  "subject": "German",
+  "location": "Dubai",
+  "price": 75,
+  "image": "images/German.jpeg",
+  "availableInventory": 5,
+  "space": 5
+},{
+  "_id": {
+    "$oid": "63de360fcd01cfc8fa929a45"
+  },
+  "id": 1010,
+  "subject": "Economics",
+  "location": "America",
+  "price": 140,
+  "image": "images/Economics.jpeg",
+  "availableInventory": 5,
+  "space": 5
+}]
