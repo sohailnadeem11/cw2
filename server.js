@@ -19,7 +19,7 @@ const mongoClient = require('mongodb').MongoClient;
 
 let db;
 MongoClient.connect('mongodb+srv://sohail:sohailnadeem@cluster0.o3egadt.mongodb.net', (err,client) => {
-    db = client.db('Webstore')
+    db = client.db('cw2')
 })
 
 //Logger Middleware
@@ -53,7 +53,7 @@ app.use(logger);
 // Display message for root path to show tnat Api is Working
 app.get('/', (req,res,next) => {
     res.send('Select a collection, e.g., /collection/messages');
-});
+})
 
 //Get the collection name
 app.param('collectionName', (req,res,next,collectionName) => {
@@ -101,8 +101,8 @@ app.get('/lessons', (request,response)=>{
         if(err) return next(e)
             response.json(res);
     })
-});
+})
 
 app.listen(3000, function () {
     console.log("Express.js listening on localhost:3000");
-});
+})
