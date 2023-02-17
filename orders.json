@@ -4,5 +4,7 @@
   },
   "firstName": "John",
   "lastName": "Doe",
-  "phoneNumber": "0571827439"
+  "phoneNumber": "0571827439",
+  "lessonID": "1",
+  "space": "1"
 }]
